@@ -9,7 +9,12 @@ export default function roomRoute(req, res) {
       message: "Yon don't permission to access this api",
     });
   }
-  const chatrooms = readChatRoomsDB();
 
+  const chatrooms = readChatRoomsDB();
+  const roomList = [];
+  chatrooms.map((x) => {
+    roomList.push({ roomId: x.roomId, roomName: x.roomName });
+  });
   //create room data and return response
+  return res.json({ ok: true, rooms: roomList });
 }
